@@ -2,11 +2,16 @@ const express = require('express');
 const app = express();
 const {getHTML, runBrowser} = require('./bot');
 
-runBrowser().then(() => {
-  app.listen(3000, function () {
-    console.log('App listening on port 3000!');
-  });
-});
+runBrowser().then(
+  () => {
+    app.listen(3000, function () {
+      console.log('App listening on port 3000!');
+    })
+  },
+  (err) => {
+    console.log(err)
+  }
+);
 
 app.all('/', async (req, res) => {
   console.log(req.query.url);
