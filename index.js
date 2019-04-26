@@ -2,7 +2,11 @@ const express = require('express');
 const app = express();
 const {getHTML, runBrowser} = require('./bot');
 
-runBrowser();
+runBrowser().then(() => {
+  app.listen(3000, function () {
+    console.log('App listening on port 3000!');
+  });
+});
 
 app.all('/', async (req, res) => {
   console.log(req.query.url);
@@ -13,6 +17,3 @@ app.all('*', async (req, res) => {
   res.send('hello');
 });
 
-app.listen(3000, function () {
-  console.log('App listening on port 3000!');
-});
